@@ -46,9 +46,9 @@ public class HelpService {
         help.cancleHelp();
     }
 
-    public void doneHelp(Long helpId) {
+    public void doneHelp(Long helpId, int stars) {
         Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
-        help.doneHelp();
+        help.doneHelp(stars);
         HelperUser helperUser = helperUserRepository.findById(help.getHelperUserId()).orElseThrow(IllegalAccessError::new);
         helperUser.addMoney(help.getMoney());
     }

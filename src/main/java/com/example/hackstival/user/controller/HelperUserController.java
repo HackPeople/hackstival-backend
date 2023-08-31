@@ -3,15 +3,13 @@ package com.example.hackstival.user.controller;
 
 import com.example.hackstival.request.dto.HelpDTO;
 import com.example.hackstival.user.dto.SearchCondition;
+import com.example.hackstival.user.dto.StatisticsInfo;
 import com.example.hackstival.user.dto.UserDTO;
 import com.example.hackstival.user.service.HelperUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class HelperUserController {
 
     @GetMapping("/helper/accpeteds")
     @Operation(summary = "헬퍼가 수락한 정보 조회")
-    public List<HelpDTO> retrieveHelpRequestToHelper(Long helperId) {
+    public List<HelpDTO> retrieveHelpRequestToHelper(@RequestParam Long helperId) {
         return helperUserService.retrieveAccpetedHelps(helperId);
     }
 
@@ -38,11 +36,9 @@ public class HelperUserController {
         return helperUserService.createHelperUser(userDTO);
     }
 
-    // 도움 수락
-    public void acceptHelp(Long helpId) {
-
+    @GetMapping("/helper/statistics")
+    @Operation(summary = "헬퍼 통계정보조회")
+    public StatisticsInfo retrieveStatisticAboutHelps(@RequestParam Long helperId) {
+        return helperUserService.retrieveStatisticAboutHelps(helperId);
     }
-
-    // 도움 취소
-
 }

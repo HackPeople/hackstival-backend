@@ -1,18 +1,18 @@
 package com.example.hackstival.user.service;
 
-import com.example.hackstival.request.domain.Help;
-import com.example.hackstival.request.domain.HelpRepository;
-import com.example.hackstival.request.domain.HelpRepositorySupport;
-import com.example.hackstival.request.domain.RequestType;
+import com.example.hackstival.request.domain.*;
 import com.example.hackstival.request.dto.HelpDTO;
 import com.example.hackstival.user.domain.HelperUser;
 import com.example.hackstival.user.domain.HelperUserRepository;
 import com.example.hackstival.user.domain.OldUser;
 import com.example.hackstival.user.dto.SearchCondition;
+import com.example.hackstival.user.dto.StatisticsInfo;
 import com.example.hackstival.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,9 +46,25 @@ public class HelperUserService {
         return helperUserRepository.save(HelperUser.createHelperUser(userDTO)).getId();
     }
 
-    public void accpetHelp(Long helpId, Long helperId) {
-        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
-        help.acceptHelp(helperId);
+    public StatisticsInfo retrieveStatisticAboutHelps(Long helperId) {
+        List<Help> helps = helpRepository.findByHelperUserIdAndRequestStatus(helperId, RequestStatus.DONE);
+
+        int monthHelpCount = Long.valueOf(helps.stream()
+                .filter(o -> LocalDate.now().atStartOfDay().isBefore(o.getStartTime()))
+                .count()).intValue();
+        int totalStarCount = helps.stream()
+                .mapToInt(o -> o.getStars())
+                .sum();
+        int totalMoney = Long.valueOf(helps.stream()
+                .mapToLong(o -> o.getMoney())
+                .sum()).intValue();
+
+        return StatisticsInfo.builder()
+                .totalHelpCount(helps.size())
+                .monthHelpCount(monthHelpCount)
+                .everageStar(helps.size() == 0 ? 0 : totalStarCount / helps.size())
+                .totalMoney(totalMoney)
+                .build();
     }
 
 }

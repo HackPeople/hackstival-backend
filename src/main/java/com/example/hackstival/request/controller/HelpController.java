@@ -50,7 +50,7 @@ public class HelpController {
 
     @PutMapping("/help/done")
     @Operation(summary = "도움 완료")
-    public void doneHelp(@RequestParam Long helpId) {
-        helpService.doneHelp(helpId);
+    public void doneHelp(@RequestParam Long helpId, int stars) {
+        helpService.doneHelp(helpId, stars);
     }
 }

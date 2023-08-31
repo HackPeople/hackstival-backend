@@ -32,6 +32,7 @@ public class Help extends BaseEntity {
     private LocalDateTime endTime;
 
     private RequestStatus requestStatus;
+    private int stars;
 
     public static Help registerHelp(HelpDTO helpDTO) {
         return Help.builder()
@@ -65,8 +66,9 @@ public class Help extends BaseEntity {
         requestStatus = RequestStatus.CANCLE;
     }
 
-    public void doneHelp() {
+    public void doneHelp(int stars) {
         if (requestStatus == RequestStatus.CONFIRMED) requestStatus = RequestStatus.DONE;
+        this.stars = stars;
     }
 
     public HelpDTO toDTO() {
