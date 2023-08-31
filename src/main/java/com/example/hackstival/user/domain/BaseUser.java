@@ -2,6 +2,7 @@ package com.example.hackstival.user.domain;
 
 import com.example.hackstival.common.domain.Address;
 import com.example.hackstival.common.domain.BaseEntity;
+import com.example.hackstival.user.dto.UserDTO;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -30,4 +31,19 @@ public abstract class BaseUser extends BaseEntity {
 
     // 성별
     private SexType sexType;
+
+
+    public UserDTO toDTO() {
+        return UserDTO.builder()
+                .id(getId())
+                .userId(userId)
+                .userPw(userPw)
+                .address(address)
+                .profileImage(profileImage)
+                .userName(userName)
+                .userPhoneNumber(userPhoneNumber)
+                .sexType(sexType)
+                .build();
+    }
+
 }

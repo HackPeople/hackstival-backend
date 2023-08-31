@@ -18,7 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OldUserController {
 
-     private final OldUserService oldUserService;
+    private final OldUserService oldUserService;
+
     @GetMapping("/olduser/helps")
     @Operation(summary = "노인이 자신이 요청한 도움 목록 조회")
     public List<HelpDTO> retriveHelpsByUser(@RequestParam Long oldUserId) {
