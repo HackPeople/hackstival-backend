@@ -18,7 +18,7 @@ env:
   # ECS 클러스터명
   ECS_CLUSTER: cluster
   # ECS 서비스명
-  ECS_SERVICE: nori-application
+  ECS_SERVICE: nori-application1
   # ECS Task definition 파일명
   ECS_TASK_DEFINITION: nori-application-task-production.json
 
