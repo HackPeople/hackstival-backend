@@ -25,8 +25,8 @@ public class Help extends BaseEntity {
 
     private Long money;
 
-    private String oldUserId;
-    private String helperUserId;
+    private Long oldUserId;
+    private Long helperUserId;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -41,14 +41,10 @@ public class Help extends BaseEntity {
                 .money(helpDTO.getMoney())
                 .oldUserId(helpDTO.getOldUserId())
                 .helperUserId(helpDTO.getHelperUserId())
-                .startTime(parseDateTime(helpDTO.getStartTime()))
-                .endTime(parseDateTime(helpDTO.getEndTime()))
+                .startTime(parseFullDateTime(helpDTO.getStartTime()))
+                .endTime(parseFullDateTime(helpDTO.getEndTime()))
                 .requestStatus(helpDTO.getRequestStatus())
                 .build();
-    }
-
-    private static LocalDateTime parseDateTime(String time) {
-        return LocalDateTime.parse(time + ":00", FULL_DATE_FORMATTER);
     }
 
     private void expireUser() {

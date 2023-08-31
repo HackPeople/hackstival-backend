@@ -37,9 +37,9 @@ public class HelpDTO {
     @Schema(description = "용돈")
     private Long money;
     @Schema(description = "노인 아이디")
-    private String oldUserId;
+    private Long oldUserId;
     @Schema(description = "헬퍼 아이디")
-    private String helperUserId;
+    private Long helperUserId;
     @Schema(description = "도움 요청의 현재 상태 (요청, 수락, 매칭, 수락이후 거절, 만료)")
     private RequestStatus requestStatus;
 }
