@@ -4,14 +4,17 @@ import com.example.hackstival.common.domain.Address;
 import com.example.hackstival.common.domain.BaseEntity;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
-public class BaseUser extends BaseEntity {
+@SuperBuilder
+@Entity
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class BaseUser extends BaseEntity {
     // persnal info
     private String userId;
     private String userPw;

@@ -5,6 +5,7 @@ import com.example.hackstival.request.dto.HelpDTO;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +13,8 @@ import static com.example.hackstival.common.Constant.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 public class Help extends BaseEntity {
 
     private String content;
