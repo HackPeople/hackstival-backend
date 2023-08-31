@@ -1,6 +1,5 @@
 package com.example.hackstival.request.domain;
 
-import com.example.hackstival.common.domain.Address;
 import com.example.hackstival.common.domain.BaseEntity;
 import com.example.hackstival.request.dto.HelpDTO;
 import jakarta.persistence.Embedded;
@@ -8,6 +7,8 @@ import jakarta.persistence.Entity;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
+import static com.example.hackstival.common.Constant.*;
 
 @Entity
 @Getter
@@ -40,10 +41,14 @@ public class Help extends BaseEntity {
                 .money(helpDTO.getMoney())
                 .oldUserId(helpDTO.getOldUserId())
                 .helperUserId(helpDTO.getHelperUserId())
-                .startTime(helpDTO.getStartTime())
-                .endTime(helpDTO.getEndTime())
+                .startTime(parseDateTime(helpDTO.getStartTime()))
+                .endTime(parseDateTime(helpDTO.getEndTime()))
                 .requestStatus(helpDTO.getRequestStatus())
                 .build();
+    }
+
+    private static LocalDateTime parseDateTime(String time) {
+        return LocalDateTime.parse(time + ":00", FULL_DATE_FORMATTER);
     }
 
     private void expireUser() {
@@ -62,10 +67,9 @@ public class Help extends BaseEntity {
                 .money(money)
                 .oldUserId(oldUserId)
                 .helperUserId(helperUserId)
-                .startTime(startTime)
-                .endTime(endTime)
+                .startTime(startTime.format(SIMPLE_DATE_FORMATTER))
+                .endTime(endTime.format(SIMPLE_DATE_FORMATTER))
                 .requestStatus(requestStatus)
                 .build();
     }
-
 }

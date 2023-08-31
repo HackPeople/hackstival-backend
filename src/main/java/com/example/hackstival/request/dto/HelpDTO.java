@@ -22,10 +22,10 @@ public class HelpDTO {
     private Long id;
     @Schema(description = "상세 정보")
     private String content;
-    @Schema(description = "도움 시작 시간")
-    private LocalDateTime startTime;
-    @Schema(description = "도움 종료 시간")
-    private LocalDateTime endTime;
+    @Schema(description = "도움 시작 시간", defaultValue = "2023/08/31 08:56")
+    private String startTime;
+    @Schema(description = "도움 종료 시간", defaultValue = "2023/08/31 08:56")
+    private String endTime;
     @Schema(description = "요청 유형")
     private RequestType requestType;
     @Schema(description = "출발지")
