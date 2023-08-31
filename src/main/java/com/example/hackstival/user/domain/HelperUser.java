@@ -27,4 +27,9 @@ public class HelperUser extends BaseUser {
                 .interestedRequestType(userDTO.getInterestedRequestType())
                 .build();
     }
+
+    public void addMoney(Long money) {
+        totalMoney += money;
+    }
+
 }

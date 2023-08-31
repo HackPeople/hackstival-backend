@@ -47,9 +47,26 @@ public class Help extends BaseEntity {
                 .build();
     }
 
-    private void expireUser() {
-        if(requestStatus.isDecided()) return;
-        if(startTime.isAfter(LocalDateTime.now())) requestStatus = RequestStatus.EXPIRE;
+    public void expireUser() {
+        if (requestStatus.isDecided()) return;
+        if (startTime.isAfter(LocalDateTime.now())) requestStatus = RequestStatus.EXPIRE;
+    }
+
+    public void acceptHelp(Long helperUserId) {
+        if (requestStatus == RequestStatus.REQUEST) requestStatus = RequestStatus.ACCEPTED;
+        this.helperUserId = helperUserId;
+    }
+
+    public void confirmHelp() {
+        if (requestStatus == RequestStatus.ACCEPTED) requestStatus = RequestStatus.CONFIRMED;
+    }
+
+    public void cancleHelp() {
+        requestStatus = RequestStatus.CANCLE;
+    }
+
+    public void doneHelp() {
+        if (requestStatus == RequestStatus.CONFIRMED) requestStatus = RequestStatus.DONE;
     }
 
     public HelpDTO toDTO() {

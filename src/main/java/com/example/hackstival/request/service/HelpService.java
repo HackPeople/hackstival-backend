@@ -3,7 +3,10 @@ package com.example.hackstival.request.service;
 
 import com.example.hackstival.request.domain.Help;
 import com.example.hackstival.request.domain.HelpRepository;
+import com.example.hackstival.request.domain.RequestStatus;
 import com.example.hackstival.request.dto.HelpDTO;
+import com.example.hackstival.user.domain.HelperUser;
+import com.example.hackstival.user.domain.HelperUserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class HelpService {
+
+    private final HelperUserRepository helperUserRepository;
     private final HelpRepository helpRepository;
 
     public List<HelpDTO> retriveAllHelpRequestList() {
@@ -24,5 +29,27 @@ public class HelpService {
 
     public Long createHelpRequest(HelpDTO helpDTO) {
         return helpRepository.save(Help.registerHelp(helpDTO)).getId();
+    }
+
+    public void accpetHelp(Long helpId, Long helperId) {
+        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
+        help.acceptHelp(helperId);
+    }
+
+    public void confirmHelp(Long helpId) {
+        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
+        help.confirmHelp();
+    }
+
+    public void cancleHelp(Long helpId) {
+        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
+        help.cancleHelp();
+    }
+
+    public void doneHelp(Long helpId) {
+        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
+        help.doneHelp();
+        HelperUser helperUser = helperUserRepository.findById(help.getHelperUserId()).orElseThrow(IllegalAccessError::new);
+        helperUser.addMoney(help.getMoney());
     }
 }

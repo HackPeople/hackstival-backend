@@ -38,5 +38,11 @@ public class HelperUserController {
         return helperUserService.createHelperUser(userDTO);
     }
 
+    // 도움 수락
+    public void acceptHelp(Long helpId) {
+
+    }
+
+    // 도움 취소
 
 }

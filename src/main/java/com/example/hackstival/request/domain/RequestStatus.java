@@ -6,10 +6,11 @@ package com.example.hackstival.request.domain;
  * ACCEPTED : 도우미 수락
  * CONFIRMED : 노인 수락
  * CANCLE : 수락 이후 거절
+ * DONE : 완료
  * EXPIRE : 도움이 필요한 시간이 만료됨
  * */
 public enum RequestStatus {
-    REQUEST, ACCEPTED, CONFIRMED, CANCLE, EXPIRE;
+    REQUEST, ACCEPTED, CONFIRMED, CANCLE, DONE, EXPIRE;
 
     public boolean isDecided(){
        return this == CONFIRMED || this == CANCLE || this == EXPIRE;

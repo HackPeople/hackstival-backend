@@ -36,13 +36,19 @@ public class HelperUserService {
     }
 
     // 내가 수락한 정보 조회
-      public List<HelpDTO> retrieveAccpetedHelps(Long helperId) {
+    public List<HelpDTO> retrieveAccpetedHelps(Long helperId) {
         return helpRepository.findByHelperUserIdOrderByCreatedDateDesc(helperId)
                 .stream().map(Help::toDTO)
                 .toList();
     }
 
-       public Long createHelperUser(UserDTO userDTO) {
+    public Long createHelperUser(UserDTO userDTO) {
         return helperUserRepository.save(HelperUser.createHelperUser(userDTO)).getId();
     }
+
+    public void accpetHelp(Long helpId, Long helperId) {
+        Help help = helpRepository.findById(helpId).orElseThrow(IllegalAccessError::new);
+        help.acceptHelp(helperId);
+    }
+
 }
