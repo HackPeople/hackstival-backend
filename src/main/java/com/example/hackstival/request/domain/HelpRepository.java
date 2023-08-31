@@ -11,5 +11,5 @@ public interface HelpRepository extends JpaRepository<Help,Long> {
     @Override
     Optional<Help> findById(Long aLong);
     List<Help> findByOldUserIdOrderByCreatedDateDesc(Long aLong);
-
+    List<Help> findByHelperUserIdOrderByCreatedDateDesc(Long aLong);
 }

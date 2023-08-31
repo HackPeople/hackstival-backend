@@ -20,15 +20,23 @@ import java.util.List;
 @Tag(name = "helper", description = "헬퍼 화면에서 사용하는 API")
 public class HelperUserController {
     private final HelperUserService helperUserService;
+
     @GetMapping("/helper/requests")
     @Operation(summary = "요청된 도움 정보 동적 조회")
     public List<HelpDTO> retrieveHelpRequestToHelper(SearchCondition searchCondition) {
         return helperUserService.retrieveHelpRequestToHelper(searchCondition);
     }
 
+    @GetMapping("/helper/accpeteds")
+    @Operation(summary = "헬퍼가 수락한 정보 조회")
+    public List<HelpDTO> retrieveHelpRequestToHelper(Long helperId) {
+        return helperUserService.retrieveAccpetedHelps(helperId);
+    }
+
     @PostMapping("/helper")
     public Long createOldUser(@RequestBody UserDTO userDTO) {
         return helperUserService.createHelperUser(userDTO);
     }
+
 
 }

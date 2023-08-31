@@ -23,11 +23,21 @@ public class HelperUserService {
     private final HelperUserRepository helperUserRepository;
     public final HelpRepositorySupport helpRepositorySupport;
 
+    public final HelpRepository helpRepository;
+
+
     // 자신의 통계 정보 조회
 
     // 필요한 도움 정보 조회
     public List<HelpDTO> retrieveHelpRequestToHelper(SearchCondition searchCondition) {
         return helpRepositorySupport.findHelpRequests(searchCondition)
+                .stream().map(Help::toDTO)
+                .toList();
+    }
+
+    // 내가 수락한 정보 조회
+      public List<HelpDTO> retrieveAccpetedHelps(Long helperId) {
+        return helpRepository.findByHelperUserIdOrderByCreatedDateDesc(helperId)
                 .stream().map(Help::toDTO)
                 .toList();
     }

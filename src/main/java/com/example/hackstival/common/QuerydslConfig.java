@@ -1,4 +1,4 @@
-package com.example.hackstival;
+package com.example.hackstival.common;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
