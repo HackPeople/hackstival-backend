@@ -15,9 +15,9 @@ import java.util.List;
 @Builder
 @Schema(description = "조회 조건 DTO")
 public class SearchCondition {
-    @Schema(description = "시작 시간", defaultValue = "2023/08/31 08:00")
+    @Schema(description = "시작 시간", defaultValue = "2023-08-30 08:00:00")
     private String startTime;
-    @Schema(description = "종료 시간", defaultValue = "2023/09/30 09:00")
+    @Schema(description = "종료 시간", defaultValue = "2023-09-30 09:00:00")
     private String endTime;
     @Schema(description = "요청 유형 리스트")
     private List<RequestType> requestTypes;
