@@ -18,7 +18,7 @@ import java.util.List;
 public class HelperUserController {
     private final HelperUserService helperUserService;
     @GetMapping("/helper/requests")
-    @Operation(summary = "도움 전체 정보 조회")
+    @Operation(summary = "요청된 도움 정보 동적 조회")
     public List<HelpDTO> retrieveHelpRequestToHelper(SearchCondition searchCondition) {
         return helperUserService.retrieveHelpRequestToHelper(searchCondition);
     }
