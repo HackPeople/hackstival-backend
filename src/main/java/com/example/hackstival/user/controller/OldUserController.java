@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 @RestController
 @Tag(name = "oldUser", description = "노인과 관련된 컨트롤러")

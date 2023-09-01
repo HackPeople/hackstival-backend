@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 
 @RestController
 @Tag(name = "help", description = "도움 요청과 관련된 API")

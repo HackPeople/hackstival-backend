@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "helper", description = "헬퍼 화면에서 사용하는 API")
